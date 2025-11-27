@@ -1,36 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <title>Learning OS Dashboard</title>
-<link rel="stylesheet" href="assets/style.css?v=20251127">
+
+    <!-- 强制刷新 CSS（避免 GitHub Pages 缓存） -->
+    <link rel="stylesheet" href="assets/style.css?v=20251127">
+
+    <!-- Apple 字体（系统自动加载） -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                         "SF Pro Text", Helvetica Neue, Arial, sans-serif;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Learning OS Dashboard</h1>
-        <p class="subtitle">你的个人学习系统（首页会逐步变得像 Apple 一样高级）</p>
+        <p class="subtitle">你的个人学习系统（首页将一点点变成 Apple 风）</p>
 
         <!-- 课程进度卡片 -->
         <div class="card">
             <h2 style="margin-top:0;">📘 课程进度</h2>
-            <p style="color:#666; margin-top:-5px;">这里将以 Apple 风进度环（Progress Rings）形式展示当前所有课程的学习进度。</p>
-            
-            <!-- 未来将在这里插入动态图表 -->
+            <p style="color:#666; margin-top:-5px;">
+                这里将展示你的课程学习进度、单元、周次。（下一步添加 Apple 风进度环）
+            </p>
+
             <div id="progress-area">
-                <p style="color:#aaa;">（下一步我们会在这里加入圆形进度条）</p>
+                <p style="color:#aaa;">（这里之后会出现漂亮的圆形进度条）</p>
             </div>
         </div>
 
         <!-- 日历区域 -->
         <div class="card">
             <h2 style="margin-top:0;">📅 日历与截止日期</h2>
-            <p style="color:#666; margin-top:-5px;">未来你会看到课程表、作业 deadline、考试周，并能点击查看详情。</p>
+            <p style="color:#666; margin-top:-5px;">
+                未来你会看到课程表、作业 deadline、考试安排，并可以点击查看详情。
+            </p>
         </div>
 
-        <!-- 刷题系统入口 -->
+        <!-- 刷题系统 -->
         <div class="card">
             <h2 style="margin-top:0;">📝 刷题系统</h2>
-            <p style="color:#666; margin-top:-5px;">来自 Module Book、课堂内容、AI 生成的题目将在这里练习。</p>
+            <p style="color:#666; margin-top:-5px;">
+                这里将进入你的刷题中心，包括题库、错题本、模拟考试等。
+            </p>
         </div>
     </div>
 </body>
+</html>
