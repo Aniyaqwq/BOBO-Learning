@@ -1,17 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Learning OS Dashboard</title>
-    <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-    <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Arial; text-align:center; margin-top:40px;">
-        Learning OS Dashboard
-    </h1>
-    
-    <p style="text-align:center; color:#555;">
-        这是你的个人学习系统（首页将在接下来几步逐渐丰富）
-    </p>
-</body>
-</html>
+/* ========== Apple Minimalist Style ========== */
+
+/* 页面背景 + Apple 字体 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                 "SF Pro Text", Helvetica Neue, Arial, sans-serif;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+}
+
+/* 中央内容容器（宽度适中、居中） */
+.container {
+    width: 85%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+/* 主标题（大号 Apple 风） */
+h1 {
+    font-weight: 600;
+    font-size: 32px;
+    color: #111;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* 子标题 */
+.subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Apple 风卡片 */
+.card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 26px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: all 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
