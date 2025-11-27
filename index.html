@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Learning OS Dashboard</title>
 
-    <!-- 强制刷新 CSS（避免 GitHub Pages 缓存） -->
-  <link rel="stylesheet" href="https://aniyaqwq.github.io/BOBO-Learning/assets/style.css?v=20251127">
+    <!-- 强制刷新最新 CSS（防缓存） -->
+    <link rel="stylesheet" href="https://aniyaqwq.github.io/BOBO-Learning/assets/style.css?v=20251128">
 
-    <!-- Apple 字体（系统自动加载） -->
+    <!-- Apple 字体（系统自带） -->
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
@@ -19,25 +19,29 @@
 <body>
     <div class="container">
         <h1>Learning OS Dashboard</h1>
-        <p class="subtitle">你的个人学习系统（首页将一点点变成 Apple 风）</p>
+        <p class="subtitle">你的个人学习系统（首页逐渐升级中）</p>
 
         <!-- 课程进度卡片 -->
         <div class="card">
             <h2 style="margin-top:0;">📘 课程进度</h2>
             <p style="color:#666; margin-top:-5px;">
-                这里将展示你的课程学习进度、单元、周次。（下一步添加 Apple 风进度环）
+                Apple 风圆形进度环（Progress Rings）
             </p>
 
-           <div id="progress-area" style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
-    <!-- Apple 风课程进度环会自动插入到这里 -->
-</div>
+            <div id="progress-area" style="
+                display:flex;
+                gap:30px;
+                justify-content:center;
+                flex-wrap:wrap;
+                margin-top:20px;">
+            </div>
         </div>
 
         <!-- 日历区域 -->
         <div class="card">
             <h2 style="margin-top:0;">📅 日历与截止日期</h2>
             <p style="color:#666; margin-top:-5px;">
-                未来你会看到课程表、作业 deadline、考试安排，并可以点击查看详情。
+                未来这里会显示课程表、作业 deadline、考试安排。
             </p>
         </div>
 
@@ -45,78 +49,82 @@
         <div class="card">
             <h2 style="margin-top:0;">📝 刷题系统</h2>
             <p style="color:#666; margin-top:-5px;">
-                这里将进入你的刷题中心，包括题库、错题本、模拟考试等。
+                题库、错题本、AI 生成新题、模拟考试等都在这里。
             </p>
         </div>
     </div>
-<script>
-// ===== Apple 风 Progress Ring 组件 =====
 
-// 创建一个课程进度环
-function createProgressRing(courseName, progress, detail) {
-    const circleSize = 120;
-    const radius = 55;
-    const circumference = radius * 2 * Math.PI;
+    <!-- ========== Apple 风圆形进度环功能模块 ========== -->
+    <script>
+    // ===== Apple 风 Progress Ring 组件 =====
 
-    // 创建外框
-    const container = document.createElement("div");
-    container.style.textAlign = "center";
+    // 创建一个课程进度环
+    function createProgressRing(courseName, progress, detail) {
+        const circleSize = 120;
+        const radius = 55;
+        const circumference = radius * 2 * Math.PI;
 
-    // SVG 圆环
-    const svg = `
-        <svg width="${circleSize}" height="${circleSize}">
-            <circle
-                cx="${circleSize/2}" cy="${circleSize/2}"
-                r="${radius}"
-                stroke="#eee"
-                stroke-width="12"
-                fill="none"
-            ></circle>
+        // 创建外框
+        const container = document.createElement("div");
+        container.style.textAlign = "center";
 
-            <circle
-                cx="${circleSize/2}" cy="${circleSize/2}"
-                r="${radius}"
-                stroke="#5A9BFF"
-                stroke-width="12"
-                fill="none"
-                stroke-dasharray="${circumference}"
-                stroke-dashoffset="${circumference * (1 - progress)}"
-                stroke-linecap="round"
-                style="transition: stroke-dashoffset 1s ease;"
-            ></circle>
-        </svg>
-    `;
+        // SVG 圆环
+        const svg = `
+            <svg width="${circleSize}" height="${circleSize}">
+                <circle
+                    cx="${circleSize/2}" cy="${circleSize/2}"
+                    r="${radius}"
+                    stroke="#eee"
+                    stroke-width="12"
+                    fill="none"
+                ></circle>
 
-    // 环下面显示文字
-    const label = `
-        <div style="font-size:16px; margin-top:6px; font-weight:600;">
-            ${courseName}
-        </div>
-        <div style="color:#666; font-size:13px;">
-            ${detail}
-        </div>
-    `;
+                <circle
+                    cx="${circleSize/2}" cy="${circleSize/2}"
+                    r="${radius}"
+                    stroke="#5A9BFF"
+                    stroke-width="12"
+                    fill="none"
+                    stroke-dasharray="${circumference}"
+                    stroke-dashoffset="${circumference * (1 - progress)}"
+                    stroke-linecap="round"
+                    style="transition: stroke-dashoffset 1.2s ease;"
+                ></circle>
+            </svg>
+        `;
 
-    container.innerHTML = svg + label;
-    return container;
-}
+        // 环下方的文字
+        const label = `
+            <div style="font-size:16px; margin-top:6px; font-weight:600;">
+                ${courseName}
+            </div>
+            <div style="color:#666; font-size:13px;">
+                ${detail}
+            </div>
+        `;
 
-// ===== 插入示例数据 =====
-window.onload = function () {
-    const progressArea = document.getElementById("progress-area");
+        container.innerHTML = svg + label;
+        return container;
+    }
 
-    // 示例课程（之后会用 JSON 替换）
-    const courses = [
-        { name: "Marketing", progress: 0.45, detail: "Week 5 · Segmentation" },
-        { name: "Finance", progress: 0.20, detail: "Week 2 · TVM" },
-        { name: "Project", progress: 0.60, detail: "Week 6 · Report" }
-    ];
+    // ===== 示例数据（下一步改成 JSON 自动导入） =====
+    window.onload = function () {
+        const progressArea = document.getElementById("progress-area");
 
-    courses.forEach(c => {
-        const ring = createProgressRing(c.name, c.progress, c.detail);
-        progressArea.appendChild(ring);
-    });
-};
-</script>
+        // **课程示例数据（你之后会改成真正的数据）**
+        const courses = [
+            { name: "Marketing", progress: 0.45, detail: "Week 5 · Segmentation" },
+            { name: "Finance", progress: 0.20, detail: "Week 2 · TVM" },
+            { name: "Project", progress: 0.60, detail: "Week 6 · Report" }
+        ];
+
+        // 加入进度环
+        courses.forEach(c => {
+            const ring = createProgressRing(c.name, c.progress, c.detail);
+            progressArea.appendChild(ring);
+        });
+    };
+    </script>
+
 </body>
 </html>
