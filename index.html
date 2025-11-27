@@ -28,9 +28,9 @@
                 这里将展示你的课程学习进度、单元、周次。（下一步添加 Apple 风进度环）
             </p>
 
-            <div id="progress-area">
-                <p style="color:#aaa;">（这里之后会出现漂亮的圆形进度条）</p>
-            </div>
+           <div id="progress-area" style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+    <!-- Apple 风课程进度环会自动插入到这里 -->
+</div>
         </div>
 
         <!-- 日历区域 -->
@@ -49,5 +49,74 @@
             </p>
         </div>
     </div>
+<script>
+// ===== Apple 风 Progress Ring 组件 =====
+
+// 创建一个课程进度环
+function createProgressRing(courseName, progress, detail) {
+    const circleSize = 120;
+    const radius = 55;
+    const circumference = radius * 2 * Math.PI;
+
+    // 创建外框
+    const container = document.createElement("div");
+    container.style.textAlign = "center";
+
+    // SVG 圆环
+    const svg = `
+        <svg width="${circleSize}" height="${circleSize}">
+            <circle
+                cx="${circleSize/2}" cy="${circleSize/2}"
+                r="${radius}"
+                stroke="#eee"
+                stroke-width="12"
+                fill="none"
+            ></circle>
+
+            <circle
+                cx="${circleSize/2}" cy="${circleSize/2}"
+                r="${radius}"
+                stroke="#5A9BFF"
+                stroke-width="12"
+                fill="none"
+                stroke-dasharray="${circumference}"
+                stroke-dashoffset="${circumference * (1 - progress)}"
+                stroke-linecap="round"
+                style="transition: stroke-dashoffset 1s ease;"
+            ></circle>
+        </svg>
+    `;
+
+    // 环下面显示文字
+    const label = `
+        <div style="font-size:16px; margin-top:6px; font-weight:600;">
+            ${courseName}
+        </div>
+        <div style="color:#666; font-size:13px;">
+            ${detail}
+        </div>
+    `;
+
+    container.innerHTML = svg + label;
+    return container;
+}
+
+// ===== 插入示例数据 =====
+window.onload = function () {
+    const progressArea = document.getElementById("progress-area");
+
+    // 示例课程（之后会用 JSON 替换）
+    const courses = [
+        { name: "Marketing", progress: 0.45, detail: "Week 5 · Segmentation" },
+        { name: "Finance", progress: 0.20, detail: "Week 2 · TVM" },
+        { name: "Project", progress: 0.60, detail: "Week 6 · Report" }
+    ];
+
+    courses.forEach(c => {
+        const ring = createProgressRing(c.name, c.progress, c.detail);
+        progressArea.appendChild(ring);
+    });
+};
+</script>
 </body>
 </html>
