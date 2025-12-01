@@ -2,129 +2,84 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Learning OS Dashboard</title>
+    <title>Learning OS · 课程刷题系统</title>
 
-    <!-- 强制刷新最新 CSS（防缓存） -->
-    <link rel="stylesheet" href="https://aniyaqwq.github.io/BOBO-Learning/assets/style.css?v=20251128">
-
-    <!-- Apple 字体（系统自带） -->
+    <!-- 内嵌 Apple 风格 CSS -->
     <style>
         body {
+            margin: 0;
+            padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
                          "SF Pro Text", Helvetica Neue, Arial, sans-serif;
+            background: #fafafa;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            font-weight: 700;
+            font-size: 32px;
+            color: #111;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-top: 5px;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .course-btn {
+            display: block;
+            background: #fff;
+            border-radius: 14px;
+            padding: 18px;
+            text-align: center;
+            font-size: 17px;
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            transition: 0.25s;
+        }
+
+        .course-btn:hover {
+            background: #f2f2f2;
+            transform: translateY(-3px);
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Learning OS Dashboard</h1>
-        <p class="subtitle">你的个人学习系统（首页逐渐升级中）</p>
 
-        <!-- 课程进度卡片 -->
-        <div class="card">
-            <h2 style="margin-top:0;">📘 课程进度</h2>
-            <p style="color:#666; margin-top:-5px;">
-                Apple 风圆形进度环（Progress Rings）
-            </p>
+<div class="container">
+    <h1>学习系统 · 题库中心</h1>
+    <p class="subtitle">请选择你要刷题的课程</p>
 
-            <div id="progress-area" style="
-                display:flex;
-                gap:30px;
-                justify-content:center;
-                flex-wrap:wrap;
-                margin-top:20px;">
-            </div>
-        </div>
+    <div class="course-grid">
 
-        <!-- 日历区域 -->
-        <div class="card">
-            <h2 style="margin-top:0;">📅 日历与截止日期</h2>
-            <p style="color:#666; margin-top:-5px;">
-                未来这里会显示课程表、作业 deadline、考试安排。
-            </p>
-        </div>
+        <a class="course-btn" href="courses/ILGG/quiz.html">ILGG</a>
+        <a class="course-btn" href="courses/WO/quiz.html">World Order</a>
+        <a class="course-btn" href="courses/BP/quiz.html">Business Processes</a>
+        <a class="course-btn" href="courses/BC1/quiz.html">Business Communication 1</a>
+        <a class="course-btn" href="courses/BR1/quiz.html">Business Research 1</a>
+        <a class="course-btn" href="courses/PPL/quiz.html">PPL</a>
+        <a class="course-btn" href="courses/Dutch/quiz.html">Dutch A1/A2</a>
 
-        <!-- 刷题系统 -->
-        <div class="card">
-            <h2 style="margin-top:0;">📝 刷题系统</h2>
-            <p style="color:#666; margin-top:-5px;">
-                题库、错题本、AI 生成新题、模拟考试等都在这里。
-            </p>
-        </div>
     </div>
-
-    <!-- ========== Apple 风圆形进度环功能模块 ========== -->
-    <script>
-    // ===== Apple 风 Progress Ring 组件 =====
-
-    // 创建一个课程进度环
-    function createProgressRing(courseName, progress, detail) {
-        const circleSize = 120;
-        const radius = 55;
-        const circumference = radius * 2 * Math.PI;
-
-        // 创建外框
-        const container = document.createElement("div");
-        container.style.textAlign = "center";
-
-        // SVG 圆环
-        const svg = `
-            <svg width="${circleSize}" height="${circleSize}">
-                <circle
-                    cx="${circleSize/2}" cy="${circleSize/2}"
-                    r="${radius}"
-                    stroke="#eee"
-                    stroke-width="12"
-                    fill="none"
-                ></circle>
-
-                <circle
-                    cx="${circleSize/2}" cy="${circleSize/2}"
-                    r="${radius}"
-                    stroke="#5A9BFF"
-                    stroke-width="12"
-                    fill="none"
-                    stroke-dasharray="${circumference}"
-                    stroke-dashoffset="${circumference * (1 - progress)}"
-                    stroke-linecap="round"
-                    style="transition: stroke-dashoffset 1.2s ease;"
-                ></circle>
-            </svg>
-        `;
-
-        // 环下方的文字
-        const label = `
-            <div style="font-size:16px; margin-top:6px; font-weight:600;">
-                ${courseName}
-            </div>
-            <div style="color:#666; font-size:13px;">
-                ${detail}
-            </div>
-        `;
-
-        container.innerHTML = svg + label;
-        return container;
-    }
-
-    // ===== 示例数据（下一步改成 JSON 自动导入） =====
-    window.onload = function () {
-        const progressArea = document.getElementById("progress-area");
-
-        // **课程示例数据（你之后会改成真正的数据）**
-        const courses = [
-            { name: "Marketing", progress: 0.45, detail: "Week 5 · Segmentation" },
-            { name: "Finance", progress: 0.20, detail: "Week 2 · TVM" },
-            { name: "Project", progress: 0.60, detail: "Week 6 · Report" }
-        ];
-
-        // 加入进度环
-        courses.forEach(c => {
-            const ring = createProgressRing(c.name, c.progress, c.detail);
-            progressArea.appendChild(ring);
-        });
-    };
-    </script>
+</div>
 
 </body>
 </html>
